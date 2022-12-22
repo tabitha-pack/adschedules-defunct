@@ -17,6 +17,17 @@ function main () {
   const percentIncrease = 50; 
   const minClicks = 20; 
   const minConversions = 5;
+  const date = new Date();
+
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+   if (day < 10) {
+    day = '0' + day;
+   }
+  
+    let currentDate = `${year}${month}${day}`;
+    console.log(currentDate); 
     
     for (const campaign of AdsApp.campaigns()) { 
      var active = campaign.isEnabled();
@@ -27,7 +38,7 @@ function main () {
          active? ${campaign.isEnabled()}; `);  
          console.log(biddingType);
          
-         var stats = campaign.getStatsFor("ALL_TIME");
+         var stats = campaign.getStatsFor("20211129", currentDate); /*INSERT CUSTOM DATE*/
          var conversions = stats.getConversions();   
          var cost = stats.getCost();
          var cCostConv = cost/conversions; 
@@ -66,7 +77,7 @@ function main () {
             }
             
              
-           var adScheduleStats = adSchedule.getStatsFor("ALL_TIME");
+           var adScheduleStats = adSchedule.getStatsFor("20211129", currentDate); /*INSERT CUSTOM DATE*/
            var adScheduleCost = adScheduleStats.getCost(); 
            var adScheduleConversions = adScheduleStats.getConversions(); 
            var adScheduleClicks = adScheduleStats.getClicks(); 
